@@ -1,4 +1,4 @@
-/*! elementor - v3.24.0 - 09-10-2024 */
+/*! elementor - v3.24.0 - 15-10-2024 */
 "use strict";
 (self["webpackChunkelementor"] = self["webpackChunkelementor"] || []).push([["onboarding"],{
 
@@ -1428,17 +1428,15 @@ exports["default"] = ChooseFeatures;
 var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
 var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "../node_modules/@babel/runtime/helpers/slicedToArray.js"));
 var _useAjax2 = _interopRequireDefault(__webpack_require__(/*! elementor-app/hooks/use-ajax */ "../app/assets/js/hooks/use-ajax.js"));
-var _context = __webpack_require__(/*! ../context/context */ "../app/modules/onboarding/assets/js/context/context.js");
 var _message = _interopRequireDefault(__webpack_require__(/*! ../components/message */ "../app/modules/onboarding/assets/js/components/message.js"));
 var _utils = __webpack_require__(/*! ../utils/utils */ "../app/modules/onboarding/assets/js/utils/utils.js");
 var _layout = _interopRequireDefault(__webpack_require__(/*! ../components/layout/layout */ "../app/modules/onboarding/assets/js/components/layout/layout.js"));
 var _pageContentLayout = _interopRequireDefault(__webpack_require__(/*! ../components/layout/page-content-layout */ "../app/modules/onboarding/assets/js/components/layout/page-content-layout.js"));
+var _useButtonAction2 = _interopRequireDefault(__webpack_require__(/*! ../utils/use-button-action */ "../app/modules/onboarding/assets/js/utils/use-button-action.js"));
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ChooseFeatures() {
-  var _useContext = (0, _react.useContext)(_context.OnboardingContext),
-    state = _useContext.state,
-    _useAjax = (0, _useAjax2.default)(),
+  var _useAjax = (0, _useAjax2.default)(),
     setAjax = _useAjax.setAjax,
     tiers = {
       advanced: __('Advanced', 'elementor'),
@@ -1457,6 +1455,9 @@ function ChooseFeatures() {
     setTierName = _useState4[1],
     pageId = 'chooseFeatures',
     nextStep = 'goodToGo',
+    _useButtonAction = (0, _useButtonAction2.default)(pageId, nextStep),
+    state = _useButtonAction.state,
+    handleAction = _useButtonAction.handleAction,
     actionButton = {
       text: __('Upgrade Now', 'elementor'),
       href: elementorAppConfig.onboarding.urls.upgrade,
@@ -1478,6 +1479,7 @@ function ChooseFeatures() {
             })
           }
         });
+        handleAction('completed');
       }
     };
   var skipButton;
@@ -1493,6 +1495,7 @@ function ChooseFeatures() {
             })
           }
         });
+        handleAction('skipped');
       }
     };
   }
@@ -2579,6 +2582,40 @@ Connect.propTypes = {
 
 /***/ }),
 
+/***/ "../app/modules/onboarding/assets/js/utils/use-button-action.js":
+/*!**********************************************************************!*\
+  !*** ../app/modules/onboarding/assets/js/utils/use-button-action.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = useButtonAction;
+var _react = __webpack_require__(/*! react */ "react");
+var _context = __webpack_require__(/*! ../context/context */ "../app/modules/onboarding/assets/js/context/context.js");
+var _router = __webpack_require__(/*! @reach/router */ "../node_modules/@reach/router/es/index.js");
+function useButtonAction(pageId, nextPage) {
+  var _useContext = (0, _react.useContext)(_context.OnboardingContext),
+    state = _useContext.state,
+    updateState = _useContext.updateState,
+    getStateObjectToUpdate = _useContext.getStateObjectToUpdate;
+  var navigate = (0, _router.useNavigate)();
+  var handleAction = function handleAction(action) {
+    var stateToUpdate = getStateObjectToUpdate(state, 'steps', pageId, action);
+    updateState(stateToUpdate);
+    navigate('onboarding/' + nextPage);
+  };
+  return {
+    state: state,
+    handleAction: handleAction
+  };
+}
+
+/***/ }),
+
 /***/ "../app/modules/onboarding/assets/js/utils/utils.js":
 /*!**********************************************************!*\
   !*** ../app/modules/onboarding/assets/js/utils/utils.js ***!
@@ -2656,4 +2693,4 @@ exports.setSelectedFeatureList = setSelectedFeatureList;
 /***/ })
 
 }]);
-//# sourceMappingURL=onboarding.63276cc105f0e633544f.bundle.js.map
+//# sourceMappingURL=onboarding.5ceee1b219b66e943cb0.bundle.js.map
