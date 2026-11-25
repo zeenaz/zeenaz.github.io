@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>Shared Ribbon · Reference vector</title>
+  <g fill="none" stroke="#000000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path id="eye-and-orbit" d="M124 99 C115 79 114 62 122 45
+      C128 30 139 21 146 24 C159 29 161 46 156 60
+      C150 79 125 102 101 119 C75 138 36 160 33 176
+      C30 195 65 194 96 188 C142 180 183 161 211 138
+      C236 116 231 101 219 94 C204 85 177 88 139 105"/>
+    <path id="stem-and-hook" d="M124 99 C128 123 132 146 137 169
+      C144 202 146 223 130 230 C116 237 98 229 99 216
+      C99 205 109 199 117 202 C124 205 125 215 116 221"/>
+    <path id="inner-curl" d="M117 170 C108 171 100 164 101 154
+      C103 140 117 131 132 132 C147 132 157 143 156 154
+      C155 164 148 174 141 177"/>
+  </g>
+  <circle id="electron" cx="195" cy="89" r="10" fill="#000000"/>
+</svg>
